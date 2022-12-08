@@ -1,2 +1,6 @@
 target/
 node_modules/
+backups/
+cdn/
+.vscode/
+app/

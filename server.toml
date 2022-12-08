@@ -1,0 +1,6 @@
+# Rain configuration
+# File limit is in bytes
+
+ip = [0, 0, 0, 0]
+port = 3000
+file_limit = 10_000_000_000

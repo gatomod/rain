@@ -1,22 +1,30 @@
 {
-  "name": "client",
-  "private": true,
-  "version": "0.0.0",
-  "type": "module",
-  "scripts": {
-    "dev": "vite",
-    "build": "tsc && vite build",
-    "preview": "vite preview"
-  },
-  "dependencies": {
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0"
-  },
-  "devDependencies": {
-    "@types/react": "^18.0.24",
-    "@types/react-dom": "^18.0.8",
-    "@vitejs/plugin-react": "^2.2.0",
-    "typescript": "^4.6.4",
-    "vite": "^3.2.3"
-  }
+	"name": "client",
+	"private": true,
+	"version": "1.0.0",
+	"type": "module",
+	"scripts": {
+		"dev": "vite",
+		"build": "tsc && vite build && mv ./dist ../app",
+		"preview": "vite preview"
+	},
+	"dependencies": {
+		"@fluentui/react-icons": "^2.0.190",
+		"@types/node": "^18.11.11",
+		"axios": "^1.2.1",
+		"dotenv": "^16.0.3",
+		"react": "^18.2.0",
+		"react-dom": "^18.2.0",
+		"react-router-dom": "^6.4.5"
+	},
+	"devDependencies": {
+		"@types/react": "^18.0.24",
+		"@types/react-dom": "^18.0.8",
+		"@vitejs/plugin-react": "^2.2.0",
+		"autoprefixer": "^10.4.13",
+		"postcss": "^8.4.19",
+		"tailwindcss": "^3.2.4",
+		"typescript": "^4.6.4",
+		"vite": "^3.2.3"
+	}
 }
