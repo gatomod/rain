@@ -76,8 +76,6 @@ async fn main() {
     }
 
     let app = Router::new()
-        // Root path (web)
-        .route("/", get(app::handler))
         .route("/assets/:file", get(app_assets::handler))
         // Multipart handler (POST)
         .route("/cdn", get(bad_request).post(cdn_root::handler))
@@ -97,8 +95,10 @@ async fn main() {
         .route("/thumbnail/lg/:uuid", get(thumb_lg::handler))
         // File limit
         .layer(DefaultBodyLimit::max(config.file_limit))
+        // Root path (web)
+        .route("/", get(app::handler))
         // 404 handler
-        .fallback(not_found);
+        .fallback(app::handler);
 
     // note for me
     // RequestBodyLimitLayer is for specify routes

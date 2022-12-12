@@ -11,3 +11,13 @@
 	font-family: 'nunito';
 	src: url('./assets/nunito.ttf');
 }
+
+@layer base {
+	.animate-bounce {
+		@apply ease-[cubic-bezier(.24,1.61,.27,.84)] duration-300;
+	}
+
+	.animate-base {
+		@apply ease-in-out duration-200;
+	}
+}

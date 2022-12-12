@@ -89,6 +89,10 @@ pub async fn handler(mut data: Multipart) -> impl IntoResponse {
                 }
             };
 
+            if payload.author.len() > 80 && payload.name.len() > 80 {
+                return Err(bad_request());
+            }
+
             let json_data = &structs::DataFile {
                 name: payload.name,
                 author: payload.author,
@@ -142,7 +146,7 @@ pub async fn handler(mut data: Multipart) -> impl IntoResponse {
         .current_dir(&folder)
         .args(&[
             "-i",
-            &format!("video.{}", mime_ext),
+            "video.m3u8",
             "-s",
             "0",
             "-q",
@@ -159,14 +163,14 @@ pub async fn handler(mut data: Multipart) -> impl IntoResponse {
         return Err(http_500_rm(&folder).await);
     }
 
-    // ffmpegthumbnailer -i video.mp4 -s 256 -t 50% -o thumbnail.png
+    // ffmpegthumbnailer -i video.mp4 -s 512 -t 50% -o thumbnail.png
     if let Some(_) = Command::new("ffmpegthumbnailer")
         .current_dir(&folder)
         .args(&[
             "-i",
-            &format!("video.{}", mime_ext),
+            "video.m3u8",
             "-s",
-            "256",
+            "512",
             "-q",
             "10",
             "-t",
