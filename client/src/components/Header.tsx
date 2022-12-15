@@ -31,7 +31,13 @@ const Header = () => {
 					placeholder='Find by UUID'
 				/>
 			</div> */}
-			<div>
+			<div className='flex gap-x-4 list-outside'>
+				<Link
+					className='font-semibold font-nunito text-slate-200 text-lg hover:underline active:text-slate-400 transition-all'
+					to={'/about'}
+				>
+					About Rain
+				</Link>
 				<Link
 					to={'/upload'}
 					className='font-bold font-nunito text-slate-200 text-lg hover:underline active:text-slate-400 transition-all'

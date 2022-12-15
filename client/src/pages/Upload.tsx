@@ -58,7 +58,7 @@ const Upload = ({ setUuids }: { setUuids: any }) => {
 		<div className='flex flex-col px-4 pt-6 gap-y-4 select-none'>
 			<p className='font-nunito text-3xl font-bold text-gray-800 mb-1'>Upload a video</p>
 			<div className='flex flex-col lg:flex-row gap-y-8 lg:gap-y-0 lg:gap-x-8'>
-				<label htmlFor='drop' className='w-full lg:w-1/3'>
+				<label htmlFor='drop' className='w-full flex-grow lg:w-1/3'>
 					<div className='flex flex-col justify-center items-center rounded-xl aspect-video bg-slate-300 rounded-b-xl opacity-70 backdrop-filter backdrop-blur-lg hover:-translate-y-5 hover:drop-shadow-md active:-translate-y-1 active:drop-shadow-sm animate-bounce'>
 						{!submitted ? (
 							<ArrowUpload24Regular
@@ -92,7 +92,7 @@ const Upload = ({ setUuids }: { setUuids: any }) => {
 						required={true}
 					/>
 				</label>
-				<div className='flex flex-col gap-y-8 lg:w-1/4'>
+				<div className='flex flex-col gap-y-8 lg:w-3/5'>
 					<div>
 						<p className='font-nunito text-xl font-bold text-gray-700 mb-1'>Name</p>
 						<input

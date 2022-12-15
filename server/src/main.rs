@@ -1,30 +1,19 @@
 //! # Rain Server
 //! HTTP Server for web and data management
 //!
-//! ## Routes
-//! * `/` - `GET` Web
-//! * `/cdn` - Video delivery (HLS)
-//!     * `/` - `POST` upload multipart
-//!     * `/:uuid/video.m3u8` - `GET` M3U8 file
-//!     * `/:uuid/video#.ts` - `GET` Video segments
-//! * `/data` - Video data (JSON)
-//!     * `/` - `GET` All UUID videos
-//!     * `/:uuid` - `GET` Video data
-//! * `/thumbnail` - Get thumbnails (PNG)
-//!     * `/lg/:uuid` - `GET` Large
-//!     * `/sm/:uuid` - `GET` Small
-//!
 //! ## Panics
 //! The server has handlers everywhere, is rare that fail.
 //!
 //! ## Asynchronous code
 //! The server uses Tokio to handle IO calls
+//!
 
 use axum::{extract::DefaultBodyLimit, response::IntoResponse, routing::get, Router};
 use colored::Colorize;
 use std::{net::SocketAddr, path::Path, str::from_utf8};
 use tokio::fs::{create_dir, read};
 use toml::from_str;
+use tower_http::cors::{Any, CorsLayer};
 
 #[path = "./routes/app.rs"]
 pub mod app;
@@ -53,10 +42,10 @@ async fn bad_request() -> impl IntoResponse {
     handlers::bad_request()
 }
 
-/// not found handler
+/* /// not found handler
 async fn not_found() -> impl IntoResponse {
     handlers::not_found()
-}
+} */
 
 /// ## Rain Server Main function
 /// This function receives configuration data from `server.toml`.
@@ -75,8 +64,7 @@ async fn main() {
         }
     }
 
-    let app = Router::new()
-        .route("/assets/:file", get(app_assets::handler))
+    let api = Router::new()
         // Multipart handler (POST)
         .route("/cdn", get(bad_request).post(cdn_root::handler))
         // Video.m3u8 file handler
@@ -92,12 +80,19 @@ async fn main() {
         .route("/thumbnail/sm", get(bad_request))
         .route("/thumbnail/lg", get(bad_request))
         .route("/thumbnail/sm/:uuid", get(thumb_sm::handler))
-        .route("/thumbnail/lg/:uuid", get(thumb_lg::handler))
-        // File limit
-        .layer(DefaultBodyLimit::max(config.file_limit))
+        .route("/thumbnail/lg/:uuid", get(thumb_lg::handler));
+
+    let app = Router::new()
         // Root path (web)
         .route("/", get(app::handler))
-        // 404 handler
+        .route("/assets/:file", get(app_assets::handler))
+        // API routes
+        .nest("/api", api)
+        // enable CORS
+        .layer(CorsLayer::new().allow_origin(Any).allow_methods(Any))
+        // File limit
+        .layer(DefaultBodyLimit::max(config.file_limit))
+        // Fallbacks aka web 2
         .fallback(app::handler);
 
     // note for me
@@ -109,7 +104,7 @@ async fn main() {
     if !Path::new("../cdn").is_dir() {
         println!(
             "{}   : Folder doesn't exists. Creating...",
-            "FS".yellow().bold()
+            "FS".green().bold()
         );
 
         if let Some(err) = create_dir("../cdn").await.err() {

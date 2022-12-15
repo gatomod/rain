@@ -21,7 +21,7 @@ const VideoCard = ({ uuid }: { uuid: string }) => {
 	return (
 		<Link
 			to={`/${uuid}`}
-			className='flex lg:flex-col flex-grow w-full lg:w-80 lg:max-w-sm hover:-translate-y-5 hover:drop-shadow-md active:-translate-y-1 active:drop-shadow-sm animate-bounce delay-100'
+			className='flex lg:flex-col flex-grow w-full lg:max-w-[20rem] lg:max-w-sm hover:-translate-y-5 hover:drop-shadow-md active:-translate-y-1 active:drop-shadow-sm animate-bounce delay-100'
 		>
 			<img
 				draggable={false}

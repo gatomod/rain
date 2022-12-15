@@ -5,7 +5,7 @@
 	"type": "module",
 	"scripts": {
 		"dev": "vite",
-		"build": "tsc && vite build && mv ./dist ../app",
+		"build": "rm -rf ../app && tsc && vite build && mv ./dist ../app",
 		"preview": "vite preview"
 	},
 	"dependencies": {

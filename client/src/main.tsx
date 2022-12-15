@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Header from './components/Header';
 import http from './http';
 import './index.css';
+import About from './pages/About';
 import Main from './pages/Main';
 import NotFound from './pages/NotFound';
 import Upload from './pages/Upload';
@@ -25,9 +26,11 @@ const App = () => {
 	const [uuids, setUuids] = useState([]);
 
 	useEffect(() => {
-		http.get('/data').then((res) => {
-			setUuids(res.data.data);
-		});
+		http.get('/data')
+			.then((res) => {
+				setUuids(res.data.data);
+			})
+			.catch((err) => console.log(err));
 	}, []);
 
 	return (
@@ -46,6 +49,7 @@ const App = () => {
 							<Route path={'/'} element={<Main uuids={uuids} />} />
 							<Route path={'/:uuid'} element={<Video uuids={uuids} />} />
 							<Route path={'/upload'} element={<Upload setUuids={setUuids} />} />
+							<Route path={'/about'} element={<About />} />
 							<Route path={'/notfound'} element={<NotFound />} />
 						</Routes>
 					</div>
