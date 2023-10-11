@@ -1,15 +1,20 @@
 # Is my first dockerfile, I don't know how it works exactly so sure doesn't work properly
 
-FROM archlinux
+FROM rust:alpine
 
-RUN pacman -S node pnpm rust ffmpeg ffmpegthumbnailer
+# Workdir
+WORKDIR /server
+COPY . /server
 
-RUN rustup update
+# Dependencies
+RUN apk add nodejs yarn ffmpeg ffmpegthumbnailer musl-dev
 
+RUN rustup update stable
+
+# Build
+RUN cd client && yarn && yarn build
 RUN cd server && cargo build --release
 
-RUN cd client && yarn build
-
+# Expose and run
 EXPOSE 80
-
-CMD [ "cargo run --release" ]
+CMD cargo run --release
