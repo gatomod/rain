@@ -2,11 +2,7 @@
 
 FROM archlinux
 
-LABEL maintainer="Gátomo"
-
-RUN pacman -Syyu
-
-RUN pacman -S node yarn rust ffmpeg ffmpegthumbnailer
+RUN pacman -S node pnpm rust ffmpeg ffmpegthumbnailer
 
 RUN rustup update
 
@@ -14,6 +10,6 @@ RUN cd server && cargo build --release
 
 RUN cd client && yarn build
 
-EXPOSE 3000
+EXPOSE 80
 
 CMD [ "cargo run --release" ]
