@@ -17,7 +17,7 @@ An extremely minimalist video delivery platform made with React and Rust.
 ## Getting started
 To start using Rain you need to install certain programs and build it.
 ### Configuration
-Before build Rain, you need to configure two files in repository: `client.json` and `server.toml`
+Before build Rain, you need to configure `server.toml`
 
 - In `server.toml` set the port and the file limit (in bytes)
 ```toml
@@ -26,13 +26,6 @@ port = 3000
 file_limit = 10_000_000_000 # In bytes
 ```
 
-- In `client.json` set the server IP
-- **Note:** The server IP must be the computer IP or the public domain because the client isn't SSR, it makes request to the server. Is really inefficient but it works.
-```json
-{
-    "server": "http://10.0.0.20:3000"
-}
-```
 ### Manual build (recommended)
 #### Prerrequisites
 - FFMPEG
