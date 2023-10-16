@@ -17,4 +17,4 @@ RUN cd server && cargo build --release
 
 # Expose and run
 EXPOSE 80
-CMD cargo run --release
+CMD cd server && cargo run --release
