@@ -1,6 +1,8 @@
 # Rain
 An extremely minimalist video delivery platform made with React and Rust.
 
+I made this project in order to improve my Rust skills, but the code is too messy and inefficient. Possibly at some time I'll do a rewrite with Warp and Solid (or Leptos), with a better base and using Libav rather than spawning FFmpeg commands. Anyway, I'm proud of it and the server can handle any kind of request without crashing.
+
 ## Technologies
 ### Frontend
 - **Language:** [TypeScript](https://www.typescriptlang.org/)
@@ -9,7 +11,7 @@ An extremely minimalist video delivery platform made with React and Rust.
 - **HTTP:** [Axios](https://axios-http.com/)
 
 ### Backend
-- **Language:** [Rust](https://www.rust-lang.org/es)
+- **Language:** [Rust](https://www.rust-lang.org/)
 - **Libs:** [Axum](https://github.com/tokio-rs/axum), [Tokio](https://tokio.rs/), [Tower HTTP](https://github.com/tower-rs/tower-http), [UUID](https://github.com/uuid-rs/uuid), [Serde](https://serde.rs/)
 - **Protocols:** [HLS](https://www.rfc-editor.org/rfc/rfc8216), [HTTP 1.1](https://www.rfc-editor.org/rfc/rfc2616)
 - **Video:** [FFMPEG](https://ffmpeg.org/), [FFMPEG Thumbnailer](https://github.com/dirkvdb/ffmpegthumbnailer)
@@ -26,20 +28,36 @@ port = 3000
 file_limit = 10_000_000_000 # In bytes
 ```
 
-### Manual build (recommended)
-#### Prerrequisites
-- FFMPEG
-- FFMPEG Thumbnailer
+
+### Docker
+To use docker, run the following commands.
+```sh
+# Clone the repo
+git clone https://github.com/gatomod/rain && cd rain
+
+# Build Dockerfile
+docker build -t gatomo/rain:latest .
+
+# Run the container
+# - Choose a port. 80 is the default one
+# - Volumes are used to preserve data. Choose a path
+docker run --name rain -p 80:80 -v /route/to/store/cdn:/server/cdn gatomo/rain
+```
+
+### Manual build
+#### Prerequisites
+- FFmpeg
+- FFmpeg Thumbnailer
 - Rust and Cargo
 - Node.js and Yarn
 
-If you have all installed, update all to latest versions.
+If you have all installed, update all to latest versions (not required but recommended).
 
 #### Building
 Run the following command to build server and client
 ```sh
 # build client
-cd client && yarn build;
+cd client && yarn build
 
 # build server
 cd server && cargo build --release
@@ -50,10 +68,6 @@ Run the server
 ```sh
 cd server && cargo run --release
 ```
-
-### Docker (not working)
-I don't know how to use Docker. I tried to make a Dockerfile but I don't know if works. You can see it and modify at your own judgment.
-
 
 ## API Endpoints
 * `/` - `GET` Web
@@ -81,9 +95,6 @@ There are some security and performance issues, so is recommended to personal us
 🥳 Any PR is welcome! Is a small project, so the guideline is to follow the code style and not make insane purposes.
 
 ## Links
-- [Web](https://gatomo.ga)
 - [Donate (via PayPal)](https://paypal.me/gatomooficial)
-- [Discord (Spanish)](https://gatomo.ga/discord)
-- [Revolt (Spanish)](https://gatomo.ga/revolt)
 
-*Gátomo - GPL-3 License*
+*Gátomo - AGPL-3 License*
