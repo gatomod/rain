@@ -1,7 +1,10 @@
 # Rain
 An extremely minimalist video delivery platform made with React and Rust.
 
-I made this project in order to improve my Rust skills, but the code is too messy and inefficient. Possibly at some time I'll do a rewrite with Warp and Solid (or Leptos), with a better base and using Libav rather than spawning FFmpeg commands. Anyway, I'm proud of it and the server can handle any kind of request without crashing.
+## Note
+This was my first project in Rust, I made it a few years ago to use that language in a real project, but the code is too messy and inneficient so please, don't bother me with that.
+
+I have the intention to rewrite it with the same stack and using it for my Final Degree Project, organizing it better, documenting it and using another libraries.
 
 ## Technologies
 ### Frontend
@@ -92,9 +95,6 @@ Rain is licensed under the [GPL-3 license](https://www.gnu.org/licenses/gpl-3.0.
 There are some security and performance issues, so is recommended to personal use at home or testing.
 
 ## Contribute
-🥳 Any PR is welcome! Is a small project, so the guideline is to follow the code style and not make insane purposes.
-
-## Links
-- [Donate (via PayPal)](https://paypal.me/gatomooficial)
+🥳 Any PR is welcome! Rain is a small project, so please follow the code style and avoid making insane proposals.
 
 *Gátomo - AGPL-3 License*
